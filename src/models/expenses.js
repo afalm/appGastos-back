@@ -3,8 +3,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var userSchema = Schema({
-    expenses: Number
+var expensesSchema = Schema({
+    quantity: Number
 },
 {
     timestamps: true, //añade cuando fue actualizado o creado
@@ -12,4 +12,4 @@ var userSchema = Schema({
 }
 );
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('expenses', expensesSchema);

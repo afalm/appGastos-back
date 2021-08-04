@@ -17,6 +17,6 @@ app.use(
 app.use(express.json());
 
 
-app.use("/api/users", require('./routes/user.routes'));//para poder usar las rutas
+app.use("/api/expenses", require('./routes/expenses.routes'));//para poder usar las rutas
 
 module.exports = app;
