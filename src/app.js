@@ -1,7 +1,6 @@
 //creamos una constante express para crear las rutas
 //y empezar el servidor
 const express = require('express');
-var bodyParser = require('body-parser');
 var app = express();
 //Constante con el módulo morgan
 const morgan = require('morgan');
@@ -9,10 +8,15 @@ const morgan = require('morgan');
 // si no tiene valor definido se le da el puerto 4000
 app.set('port', process.env.PORT || 3800);
 app.use(morgan('dev'));// Uso de morgan
+app.use(
+    express.urlencoded({
+        extended: true
+    })
+)
+
+app.use(express.json());
 
 
 app.use("/api/users", require('./routes/user.routes'));//para poder usar las rutas
-app.use(bodyParser.urlencoded({extended:false}));
-app.use(bodyParser.json());
 
 module.exports = app;
