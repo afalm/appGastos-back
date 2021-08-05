@@ -1,5 +1,9 @@
-require('./database'); // comenzamos con la conexión a la base de datos
+// comenzamos con la conexión a la base de datos
+require('./database');
+
 const app = require('./app');
 
-app.listen(app.get('port'));//iniciamos el servidor
+//iniciamos el servidor
+app.listen(app.get('port'));
+
 console.log('Server on port', app.get('port'));

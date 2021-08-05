@@ -4,19 +4,23 @@ const express = require('express');
 var app = express();
 //Constante con el módulo morgan
 const morgan = require('morgan');
-//definimos la variable port dandole o valor definido por el SO
-// si no tiene valor definido se le da el puerto 4000
+//Definimos la variable port dandole o valor definido por el Sistema Operativo
+//si no tiene valor definido se le da el puerto 3800
 app.set('port', process.env.PORT || 3800);
-app.use(morgan('dev'));// Uso de morgan
+
+// Uso de morgan
+app.use(morgan('dev'));
+
 app.use(
     express.urlencoded({
         extended: true
     })
-)
+);
 
 app.use(express.json());
 
-
-app.use("/api/expenses", require('./routes/expenses.routes'));//para poder usar las rutas
+//Usamos por defecto la ruta "/api/expenses y luego las rutas definidas en el fichero expenses.routes"
+app.use("/api/expenses", require('./routes/expenses.routes'));
 
 module.exports = app;
+

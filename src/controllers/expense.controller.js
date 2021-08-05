@@ -8,8 +8,8 @@ expenseCtrl.getExpense= (req, res) =>{
 }
 expenseCtrl.createExpense = (req, res) =>{
     var newExpense = new expense(); 
-    var params = req.body;//cambiar por .body
-    console.log(req.body);//ver por consola los params
+    var params = req.body;
+    console.log(req.body);
 
     newExpense.quantity = params.quantity;
     // guardamos el objeto en la base de datos
@@ -28,7 +28,7 @@ expenseCtrl.editExpense = (req, res) =>{
 expenseCtrl.getExpenses = async (req, res) =>{
     const expenses = await expense.find();
     res.json(expenses);
-    //res.send('get Expense')
+    
 }
 
 module.exports = expenseCtrl;
