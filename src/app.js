@@ -1,15 +1,19 @@
-//creamos una constante express para crear las rutas
-//y empezar el servidor
+/* Creamos una constante express para crear las rutas,
+y empezar el servidor*/
 const express = require('express');
 var app = express();
-//Constante con el módulo morgan
+// Constante con el módulo morgan
 const morgan = require('morgan');
-//Definimos la variable port dandole o valor definido por el Sistema Operativo
-//si no tiene valor definido se le da el puerto 3800
+// Constante cors, para aceptar las peticiones HTTP
+const cors = require('cors');
+/* Definimos la variable port dandole o valor definido por el Sistema Operativo
+  si no tiene valor definido se le da el puerto 3800*/
 app.set('port', process.env.PORT || 3800);
 
 // Uso de morgan
 app.use(morgan('dev'));
+// Sin parámetros acepta cualquier tipod e petición
+app.use(cors());
 
 app.use(
     express.urlencoded({
@@ -19,7 +23,8 @@ app.use(
 
 app.use(express.json());
 
-//Usamos por defecto la ruta "/api/expenses y luego las rutas definidas en el fichero expenses.routes"
+/* Usamos por defecto la ruta "/api/expenses y luego las rutas definidas
+ en el fichero expenses.routes"*/
 app.use("/api/expenses", require('./routes/expenses.routes'));
 
 module.exports = app;

@@ -12,7 +12,7 @@ expenseCtrl.createExpense = (req, res) =>{
     console.log(req.body);
 
     newExpense.quantity = params.quantity;
-    // guardamos el objeto en la base de datos
+    // Guardamos el objeto en la base de datos
     newExpense.save((err, expenseStored) => {
         if(err) return res.status(500).send({message: 'Error al guardar'});
         if(!expenseStored) return res.status(404).send({messge: 'No se ha podido guardar'});
@@ -27,6 +27,7 @@ expenseCtrl.editExpense = (req, res) =>{
 }
 expenseCtrl.getExpenses = async (req, res) =>{
     const expenses = await expense.find();
+    if(expenses.err) res.status(500).send({ message: "Error al mostrar la consulta."})
     res.json(expenses);
     
 }

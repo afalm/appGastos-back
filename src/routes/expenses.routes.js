@@ -3,11 +3,17 @@ const router = Router();
 
 const expenseCtrl = require('../controllers/expense.controller');
 
-//Con Router de express podemos ya crear rutas
-router.get('/', expenseCtrl.getExpenses);//Obtenemos los gastos
-router.get('/:id', expenseCtrl.getExpense);// Obtenemos un gasto según id
-router.post('/create', expenseCtrl.createExpense);// Creamos un gasto
-router.put('/:id', expenseCtrl.editExpense);// Editar gastos
-router.delete('/:id', expenseCtrl.deleteExpense);//Eliminar gastos
+// Con Router de express podemos ya crear rutas
+//Obtenemos los gastos
+router.get('/', expenseCtrl.getExpenses);
+// Obtenemos un gasto según id
+router.get('/:id', expenseCtrl.getExpense);
+// Creamos un gasto
+router.post('/create', expenseCtrl.createExpense);
+// Editar gastos
+router.put('/:id', expenseCtrl.editExpense);
+//Eliminar gastos
+router.delete('/:id', expenseCtrl.deleteExpense);
 
 module.exports = router;
+

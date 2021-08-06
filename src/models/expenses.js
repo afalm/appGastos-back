@@ -7,8 +7,10 @@ var expensesSchema = Schema({
     quantity: Number
 },
 {
-    timestamps: true, //añade cuando fue actualizado o creado
-    versionKey: false //que no añada la version
+    // Añade cuando fue actualizado o creado
+    timestamps: true, 
+    // Que no añada la version
+    versionKey: false
 }
 );
 
