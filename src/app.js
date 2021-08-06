@@ -13,7 +13,7 @@ app.set('port', process.env.PORT || 3800);
 // Uso de morgan
 app.use(morgan('dev'));
 // Sin parámetros acepta cualquier tipod e petición
-app.use(cors());
+app.use(cors({origin: "http://localhost:4200"}));
 
 app.use(
     express.urlencoded({
