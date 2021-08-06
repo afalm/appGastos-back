@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 3800);
 
 // Uso de morgan
 app.use(morgan('dev'));
-// Sin parámetros acepta cualquier tipod e petición
+// Indicamos que es el puerto 4200(front) por el que le viene la petición.
 app.use(cors({origin: "http://localhost:4200"}));
 
 app.use(
