@@ -21,6 +21,7 @@ app.use(
     })
 );
 
+
 app.use(express.json());
 
 /* Usamos por defecto la ruta "/api/expenses y luego las rutas definidas

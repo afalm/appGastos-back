@@ -11,7 +11,7 @@ router.get('/:id', expenseCtrl.getExpense);
 // Creamos un gasto
 router.post('/create', expenseCtrl.createExpense);
 // Editar gastos
-router.put('/:id', expenseCtrl.editExpense);
+router.put('/:id', expenseCtrl.updateExpense);
 //Eliminar gastos
 router.delete('/:id', expenseCtrl.deleteExpense);
 
