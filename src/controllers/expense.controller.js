@@ -4,31 +4,35 @@ const expenseCtrl = {}
 var expense = require('../models/expenses.js');
 
 expenseCtrl.getExpense = async (req, res) =>{
-  var expenseId = req.params.id;
-  const expenseFound = await expense.findById(expenseId);
-  if(expenseFound.err) res.status(500).send({ message: "Error al mostrar la consulta"});
-  if(!expenseFound) res.status(404).send({ messaje: "No hay gastos que consultar" });
-  res.json(expenseFound);
+    var expenseId = req.params.id;
+    expense.findById(expenseId,(err, expenseFound)=>{
+        if(expense.err) return res.status(500).send({ message: "Error al mostrar la consulta"});
+        if(!expenseFound) return res.status(404).send({ messaje: "No hay gastos que consultar" });
+        return res.json(expenseFound);
+    });
+      
 }
-expenseCtrl.createExpense = (req, res) =>{
+expenseCtrl.createExpense = (req, res) =>{// BUG
     var newExpense = new expense(); 
     var params = req.body;
     console.log(req.body);
 
     newExpense.quantity = params.quantity;
+    newExpense.description = params.description;
+    newExpense.date = params.date;
     // Guardamos el objeto en la base de datos
     newExpense.save((err, expenseStored) => {
-        if(err) return res.status(500).send({ message: 'Error al guardar' });
-        if(!expenseStored) return res.status(404).send({ messge: 'No se ha podido guardar' });
+        if(err || params.quantity == null ) return res.status(500).send({ message: 'Error al guardar' });
+        if(!expenseStored ) return res.status(404).send({ messge: 'No se ha podido guardar' });
         return res.status(200).send({ expense: expenseStored });
     });
 }
 expenseCtrl.deleteExpense = (req, res) =>{
     var expenseId = req.params.id;
     expense.findByIdAndDelete(expenseId, (err, expenseRemoved) =>{
-        if(err) return res.status(500).send({ message: "Error al eliminar el gasto" });
-        if(!expenseRemoved)res.status(404).send({ message: "No se puede eliminar ese gasto" });
-        return res.status(200).send({ expense: expenseRemoved });
+        if(expense.err) return res.status(500).send({ message: "Error al eliminar el gasto" });
+        if(!expenseRemoved) return res.status(404).send({ message: "No se puede eliminar ese gasto" });
+        return res.status(200).send({ expenseRemoved });
     })
 }
 expenseCtrl.updateExpense = (req, res) =>{
@@ -38,7 +42,7 @@ expenseCtrl.updateExpense = (req, res) =>{
     var expenseUpdate = req.body;
 
     expense.findByIdAndUpdate(expenseId, expenseUpdate, (err, expenseUpdate) => {
-        if(err) return res.status(500).send({ message: "Error al actualizar el gasto" });
+        if(expense.err) return res.status(500).send({ message: "Error al actualizar el gasto" });
         if(!expenseUpdate) return res.status(404).send({ messaje: "No existe el gasto para actualizar" });
 
         return res.status(200).send({
@@ -48,7 +52,7 @@ expenseCtrl.updateExpense = (req, res) =>{
 }
 expenseCtrl.getExpenses = async (req, res) =>{
     const expenses = await expense.find();
-    if(expenses.err) res.status(500).send({ message: "Error al mostrar la consulta."});
+    if(expense.err) res.status(500).send({ message: "Error al mostrar la consulta."});
     if(!expenses) res.status(404).send({ messaje: "No hay gastos que consultar" });//recordar para commit
     res.json(expenses);
     
